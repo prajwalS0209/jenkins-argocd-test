@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  namespace: argocd
+spec:
+  selector:
+    matchLabels:
+      app: argocd-latest-test
+  template:
+    metadata:
+      labels:
+        app: argocd-latest-test
+    spec:
+      containers:
+      - name: argocd-latest-test
+        image: prajwlas0209/jenkinstest:version-1
+        ports:
+        - containerPort: 80
+---
+# Define a Service to expose the deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service 
+  namespace: argocd
+spec:
+  type: NodePort
+  selector:
+    app: argocd-latest-test
+  ports:
+  - protocol: TCP
+    port: 80  # Service port (can be different from container port)
+    targetPort: 80  # Target port within the container
