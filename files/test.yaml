@@ -6,14 +6,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: argocd-latest-test
+      app: argocd-jenkins-test
   template:
     metadata:
       labels:
-        app: argocd-latest-test
+        app: argocd-jenkins-test
     spec:
       containers:
-      - name: argocd-latest-test
+      - name: argocd-jenkins-test
         image: prajwlas0209/jenkinstest:version-1
         ports:
         - containerPort: 80
@@ -27,7 +27,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: argocd-latest-test
+    app: argocd-jenkins-test
   ports:
   - protocol: TCP
     port: 80  # Service port (can be different from container port)
